@@ -81,7 +81,7 @@ const TaskSetConstructor = ({
   addMultipleLinesChangeToHistory,
 }: ConnectedProps<typeof connector>): JSX.Element => {
   // get code from url
-  const { code: taskSetCode } = useParams();
+  const { code: taskSetCode } = useParams<{ code: any }>();
 
   // get creation mode using custom hook
   const creationMode: ConstructorCreationMode = useCreationMode();
@@ -194,7 +194,18 @@ const TaskSetConstructor = ({
     {
       name: "subjectType",
       label: "Предметная область",
-      type: "text",
+      isMulti: false,
+      options: [
+        { value: "standart_math", label: "Стандартная математика" },
+        { value: "combinatorics", label: "Комбинаторика" },
+        //{ value: "derivations_integrals", label: "Производные и интегралы" },
+        //{ value: "probability_and_math_stat", label: "Мат. статистика и мат. вероятность" },
+        { value: "complex_numbers", label: "Комплексные числа" },
+        //{ value: "asymptotic_analysis", label: "Асимптотический анализ" },
+        //{ value: "set", label: "Множества" },
+        { value: "logic", label: "Математическая логика" },
+        { value: "physics", label: "Физика" },
+      ],
     },
     {
       name: "otherData",
@@ -336,11 +347,10 @@ const TaskSetConstructor = ({
                         const { name, iconUrl } = mode;
                         return (
                           <div
-                            className={`task-set-constructor__visualization-mode-switcher ${
-                              name === currentVisualizationMode
-                                ? "task-set-constructor__visualization-mode-switcher--active"
-                                : ""
-                            }`}
+                            className={`task-set-constructor__visualization-mode-switcher ${name === currentVisualizationMode
+                              ? "task-set-constructor__visualization-mode-switcher--active"
+                              : ""
+                              }`}
                             onClick={() => {
                               setCurrentVisualizationMode(name);
                             }}
@@ -352,11 +362,10 @@ const TaskSetConstructor = ({
                     </div>
                   </div>
                   <div
-                    className={`${
-                      currentVisualizationMode === "table"
-                        ? "form-levels-table"
-                        : "form-levels-list"
-                    }`}
+                    className={`${currentVisualizationMode === "table"
+                      ? "form-levels-table"
+                      : "form-levels-list"
+                      }`}
                   >
                     {currentVisualizationMode === "list" && (
                       <div className="form-levels-list__select">
@@ -365,10 +374,9 @@ const TaskSetConstructor = ({
                             <div
                               key={field.id}
                               onClick={() => setSelectedTask(index)}
-                              className={`form-levels-list__select-option ${
-                                index === selectedTask &&
+                              className={`form-levels-list__select-option ${index === selectedTask &&
                                 "form-levels-list__select-option--active"
-                              }`}
+                                }`}
                             >
                               <Icon
                                 path={
@@ -412,7 +420,7 @@ const TaskSetConstructor = ({
                           <button
                             type="button"
                             className="btn form-levels-list__action-button u-mr-sm"
-                            onClick={() => {}}
+                            onClick={() => { }}
                           >
                             <Icon path={mdiPlus} size={1.2} />
                             <span>существующая задача</span>
@@ -428,11 +436,10 @@ const TaskSetConstructor = ({
                       </div>
                     )}
                     <div
-                      className={`${
-                        currentVisualizationMode === "list"
-                          ? "form-levels-list__selected-level"
-                          : ""
-                      }`}
+                      className={`${currentVisualizationMode === "list"
+                        ? "form-levels-list__selected-level"
+                        : ""
+                        }`}
                     >
                       {fields.map((field, index: number) => {
                         return (
@@ -444,7 +451,7 @@ const TaskSetConstructor = ({
                                 ? taskSetJSON.tasks[index]
                                 : fields[index]
                             }
-                            updateDemo={() => {}}
+                            updateDemo={() => { }}
                             visualizationMode={currentVisualizationMode}
                             isRendered={
                               currentVisualizationMode === "list" &&
@@ -482,7 +489,7 @@ const TaskSetConstructor = ({
                         <button
                           type="button"
                           className="btn form-levels-table__action-button"
-                          onClick={() => {}}
+                          onClick={() => { }}
                         >
                           <Icon path={mdiPlus} size={1.2} />
                           <span>существующая задача</span>
@@ -521,9 +528,8 @@ const TaskSetConstructor = ({
           />
         </div>
         <div
-          className={`task-set-constructor__hints-desktop ${
-            showHintsBlock && "task-set-constructor__hints-desktop--visible"
-          }`}
+          className={`task-set-constructor__hints-desktop ${showHintsBlock && "task-set-constructor__hints-desktop--visible"
+            }`}
           style={{
             width: showHintsBlock ? `calc(50% - ${hintsDeltaX}px)` : "0",
           }}

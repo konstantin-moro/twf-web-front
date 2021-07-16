@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { ConstructorCreationMode } from "../common-types";
 
 const useCreationMode = (): ConstructorCreationMode => {
-  const { code } = useParams();
+  const { code } = useParams<{ code: string }>();
   const isCreateByExample = useLocation().search === "?create-by-example";
 
   if (code && isCreateByExample) {

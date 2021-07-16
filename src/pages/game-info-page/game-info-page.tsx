@@ -108,7 +108,7 @@ const GameInfoPage: React.FC<GameInfoPageProps> = ({
   const playersTabId: string = translationPrefix + ".playersTab";
   const levelsTabId: string = translationPrefix + ".levelsTab";
 
-  const { gameCode } = useParams();
+  const { gameCode } = useParams<{ gameCode: any }>();
 
   useEffect(() => {
     fetchLevelTabsStartAsync({

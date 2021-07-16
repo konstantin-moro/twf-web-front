@@ -91,7 +91,7 @@ const PlayerInfoPage: React.FC<PlayerInfoPageProps> = ({
   const gamesPlayedId: string = translationPrefix + ".gamesPlayed";
   const levelsCompletedId: string = translationPrefix + ".levelsCompleted";
 
-  const { playerCode } = useParams();
+  const { playerCode } = useParams<{ playerCode: any }>();
   // using browser api and react router to get query params
   const query: URLSearchParams = new URLSearchParams(useLocation().search);
   const login: string = query.get("login") || "";

@@ -13,6 +13,7 @@ export interface RulePackConstructorReceivedForm {
   descriptionShortEn: string;
   descriptionRu: string;
   descriptionEn: string;
+  subjectType: string;
   rulePacks?: RulePackLink[];
   rules?: RuleConstructorReceivedForm[];
 }
@@ -26,6 +27,7 @@ export interface RulePackConstructorInputs {
   descriptionShortEn: string;
   descriptionRu: string;
   descriptionEn: string;
+  subjectType: string;
   rulePacks?: string[];
   rules?: RuleConstructorInputs[];
 }
@@ -39,6 +41,7 @@ export interface RulePackConstructorSendForm {
   descriptionShortEn: string;
   descriptionRu: string;
   descriptionEn: string;
+  subjectType: string;
   rulePacks?: { rulePackCode: string }[];
   rules?: RuleConstructorSendForm[];
 }

@@ -5,13 +5,16 @@ import {
   RulePackLink,
 } from "./rule-pack-constructor.types";
 import {
-  RuleConstructorInputs,
-  RuleConstructorReceivedForm,
-} from "../rule-constructor/rule-constructor.types";
-import {
   convertMathInput,
   MathInputFormat,
 } from "../../utils/kotlin-lib-functions";
+import {
+  ExpressionInput
+} from "../task-constructor/task-constructor.types";
+import {
+  RuleConstructorInputs,
+  RuleConstructorReceivedForm,
+} from "../rule-constructor/rule-constructor.types";
 
 class RulePackConstructorFormatter {
   public static convertReceivedFormToConstructorInputs(
@@ -52,6 +55,11 @@ class RulePackConstructorFormatter {
     if (res.rules) {
       res.rules = res.rules.map((rule: RuleConstructorInputs) => {
         const formattedRule = { ...rule };
+
+        if (!rule.left && !rule.right) {
+          return formattedRule;
+        }
+
         // @ts-ignore
         formattedRule.leftStructureString = convertMathInput(
           rule.left.format,

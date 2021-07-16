@@ -9,8 +9,8 @@ export interface RuleConstructorReceivedForm {
   descriptionShortEn: string;
   descriptionRu: string;
   descriptionEn: string;
-  leftStructureString: string;
-  rightStructureString: string;
+  leftStructureString?: string;
+  rightStructureString?: string;
   left: ExpressionInput;
   right: ExpressionInput;
   priority: number;

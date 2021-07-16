@@ -50,7 +50,7 @@ const NamespaceConstructorComponent = ({
   updateNamespaceJSON,
 }: ConnectedProps<typeof connector>): JSX.Element => {
   // get code from url
-  const { code: namespaceCode } = useParams();
+  const { code: namespaceCode } = useParams<{ code: any }>();
 
   // get creation mode using custom hook
   const creationMode: ConstructorCreationMode = useCreationMode();
@@ -137,7 +137,7 @@ const NamespaceConstructorComponent = ({
           }))
         );
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   // set values due to creation mode and relevant constructor state

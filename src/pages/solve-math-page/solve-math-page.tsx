@@ -31,7 +31,7 @@ addStyles();
 
 const SolveMathPage: React.FC = () => {
   const { Step } = Steps;
-  const { taskSetCode } = useParams();
+  const { taskSetCode } = useParams<{ taskSetCode: any }>();
 
   const [isTaskSetFetched, setIsTaskSetFetched] = useState<boolean>(false);
   const [taskSet, setTaskSet] = useState<TaskSetConstructorReceivedForm>();
@@ -184,9 +184,9 @@ const SolveMathPage: React.FC = () => {
       }
       alert(
         "Вы решили правильно " +
-          correctSolutions +
-          " задач из " +
-          taskSet.tasks.length
+        correctSolutions +
+        " задач из " +
+        taskSet.tasks.length
       );
     }
   };

@@ -27,23 +27,23 @@ const RuleConstructor = ({ index }: RuleConstructorProps): JSX.Element => {
       type: "text",
     },
     {
-      name: "descriptionShortRu",
+      name: `rules[${index}].descriptionShortRu`,
       label: "Краткое описание Ru",
       type: "text",
     },
     {
-      name: "descriptionShortEn",
+      name: `rules[${index}].descriptionShortEn`,
       label: "Краткое описание En",
       type: "text",
     },
     {
-      name: "descriptionRu",
+      name: `rules[${index}].descriptionRu`,
       label: "Описание Ru",
       type: "text",
       isTextArea: true,
     },
     {
-      name: "descriptionEn",
+      name: `rules[${index}].descriptionEn`,
       label: "Описание En",
       type: "text",
       isTextArea: true,

@@ -64,7 +64,7 @@ const LevelInfoPage: React.FC<LevelInfoPageProps> = ({
   const completedLevelPlayersId: string =
     translationPrefix + ".completedLevelPlayers";
   // other
-  const { levelCode } = useParams();
+  const { levelCode } = useParams<{ levelCode: any }>();
 
   useEffect(() => {
     fetchUserTabsStartAsync({

@@ -55,7 +55,7 @@ type Tab = "taskSet" | "namespace" | "rulePack";
 
 const ConstructorMenuPageComponent: React.FC = () => {
   const tabs: Tab[] = ["taskSet", "namespace", "rulePack"];
-  const { activeTab } = useParams();
+  const { activeTab } = useParams<{ activeTab: any }>();
   const [currentTab, setCurrentTab] = useState<Tab>(tabs[0]);
   const [showAllItemsModal, setShowAllItemsModal] = useState(false);
   const history = useHistory();
@@ -156,61 +156,61 @@ const ConstructorMenuPageComponent: React.FC = () => {
           "last-edited-task-sets"
         ) !== null
           ? // @ts-ignore
-            getLastEditedConstructorItemsFromLocalStorage(
-              "last-edited-task-sets"
-            )
-              .map((taskSet) => ({
-                name: taskSet,
-                action: () =>
-                  // @ts-ignore
-                  history.push("/constructor/task-set/" + taskSet),
-              }))
-              .concat([
-                {
-                  name: "Смотреть все",
-                  action: () => {
-                    setItems(
-                      taskSets.map(
-                        (taskSet: TaskSetConstructorReceivedForm) => {
-                          const { code, nameRu, namespaceCode } = taskSet;
-                          return {
-                            code,
-                            name: nameRu,
-                            namespaceCode,
-                            onSelect: (): void => {
-                              history.push("/constructor/task-set/" + code);
-                            },
-                          };
-                        }
-                      )
-                    );
-                    setPropsToFilter(["namespaceCode"]);
-                    setShowAllItemsModal(true);
-                  },
-                },
-              ])
-          : [
+          getLastEditedConstructorItemsFromLocalStorage(
+            "last-edited-task-sets"
+          )
+            .map((taskSet) => ({
+              name: taskSet,
+              action: () =>
+                // @ts-ignore
+                history.push("/constructor/task-set/" + taskSet),
+            }))
+            .concat([
               {
                 name: "Смотреть все",
                 action: () => {
                   setItems(
-                    taskSets.map((taskSet: TaskSetConstructorReceivedForm) => {
-                      const { code, nameRu, namespaceCode } = taskSet;
-                      return {
-                        code,
-                        name: nameRu,
-                        namespaceCode,
-                        onSelect: (): void => {
-                          history.push("/constructor/task-set/" + code);
-                        },
-                      };
-                    })
+                    taskSets.map(
+                      (taskSet: TaskSetConstructorReceivedForm) => {
+                        const { code, nameRu, namespaceCode } = taskSet;
+                        return {
+                          code,
+                          name: nameRu,
+                          namespaceCode,
+                          onSelect: (): void => {
+                            history.push("/constructor/task-set/" + code);
+                          },
+                        };
+                      }
+                    )
                   );
                   setPropsToFilter(["namespaceCode"]);
                   setShowAllItemsModal(true);
                 },
               },
-            ],
+            ])
+          : [
+            {
+              name: "Смотреть все",
+              action: () => {
+                setItems(
+                  taskSets.map((taskSet: TaskSetConstructorReceivedForm) => {
+                    const { code, nameRu, namespaceCode } = taskSet;
+                    return {
+                      code,
+                      name: nameRu,
+                      namespaceCode,
+                      onSelect: (): void => {
+                        history.push("/constructor/task-set/" + code);
+                      },
+                    };
+                  })
+                );
+                setPropsToFilter(["namespaceCode"]);
+                setShowAllItemsModal(true);
+              },
+            },
+          ],
     },
   ];
 
@@ -253,37 +253,16 @@ const ConstructorMenuPageComponent: React.FC = () => {
           "last-edited-namespaces"
         ) !== null
           ? // @ts-ignore
-            getLastEditedConstructorItemsFromLocalStorage(
-              "last-edited-namespaces"
-            )
-              .map((namespaceCode) => ({
-                name: namespaceCode,
-                action: () =>
-                  // @ts-ignore
-                  history.push("/constructor/namespace/" + namespaceCode),
-              }))
-              .concat([
-                {
-                  name: "Смотреть все",
-                  action: () => {
-                    setItems(
-                      namespaces.map((namespace: NamespaceReceivedForm) => {
-                        const { code } = namespace;
-                        return {
-                          code,
-                          name: code,
-                          onSelect: (): void => {
-                            history.push("/constructor/namespace/" + code);
-                          },
-                        };
-                      })
-                    );
-                    setPropsToFilter([]);
-                    setShowAllItemsModal(true);
-                  },
-                },
-              ])
-          : [
+          getLastEditedConstructorItemsFromLocalStorage(
+            "last-edited-namespaces"
+          )
+            .map((namespaceCode) => ({
+              name: namespaceCode,
+              action: () =>
+                // @ts-ignore
+                history.push("/constructor/namespace/" + namespaceCode),
+            }))
+            .concat([
               {
                 name: "Смотреть все",
                 action: () => {
@@ -303,7 +282,28 @@ const ConstructorMenuPageComponent: React.FC = () => {
                   setShowAllItemsModal(true);
                 },
               },
-            ],
+            ])
+          : [
+            {
+              name: "Смотреть все",
+              action: () => {
+                setItems(
+                  namespaces.map((namespace: NamespaceReceivedForm) => {
+                    const { code } = namespace;
+                    return {
+                      code,
+                      name: code,
+                      onSelect: (): void => {
+                        history.push("/constructor/namespace/" + code);
+                      },
+                    };
+                  })
+                );
+                setPropsToFilter([]);
+                setShowAllItemsModal(true);
+              },
+            },
+          ],
     },
   ];
 
@@ -348,38 +348,16 @@ const ConstructorMenuPageComponent: React.FC = () => {
           "last-edited-rule-packs"
         ) !== null
           ? // @ts-ignore
-            getLastEditedConstructorItemsFromLocalStorage(
-              "last-edited-rule-packs"
-            )
-              .map((rulePack) => ({
-                name: rulePack,
-                action: () =>
-                  // @ts-ignore
-                  history.push("/constructor/rule-pack/" + rulePack),
-              }))
-              .concat([
-                {
-                  name: "Смотреть все",
-                  action: () => {
-                    setItems(
-                      rulePacks.map((rulePack: any) => {
-                        const { code, nameRu, namespaceCode } = rulePack;
-                        return {
-                          code,
-                          name: nameRu,
-                          namespaceCode,
-                          onSelect: (): void => {
-                            history.push("/constructor/rule-pack/" + code);
-                          },
-                        };
-                      })
-                    );
-                    setPropsToFilter(["namespaceCode"]);
-                    setShowAllItemsModal(true);
-                  },
-                },
-              ])
-          : [
+          getLastEditedConstructorItemsFromLocalStorage(
+            "last-edited-rule-packs"
+          )
+            .map((rulePack) => ({
+              name: rulePack,
+              action: () =>
+                // @ts-ignore
+                history.push("/constructor/rule-pack/" + rulePack),
+            }))
+            .concat([
               {
                 name: "Смотреть все",
                 action: () => {
@@ -400,7 +378,29 @@ const ConstructorMenuPageComponent: React.FC = () => {
                   setShowAllItemsModal(true);
                 },
               },
-            ],
+            ])
+          : [
+            {
+              name: "Смотреть все",
+              action: () => {
+                setItems(
+                  rulePacks.map((rulePack: any) => {
+                    const { code, nameRu, namespaceCode } = rulePack;
+                    return {
+                      code,
+                      name: nameRu,
+                      namespaceCode,
+                      onSelect: (): void => {
+                        history.push("/constructor/rule-pack/" + code);
+                      },
+                    };
+                  })
+                );
+                setPropsToFilter(["namespaceCode"]);
+                setShowAllItemsModal(true);
+              },
+            },
+          ],
     },
   ];
 
@@ -408,25 +408,22 @@ const ConstructorMenuPageComponent: React.FC = () => {
     <div className="constructor-menu-page">
       <ul className="constructor-menu-page__tabs">
         <li
-          className={`constructor-menu-page__tab ${
-            currentTab === tabs[0] && "constructor-menu-page__tab--active"
-          }`}
+          className={`constructor-menu-page__tab ${currentTab === tabs[0] && "constructor-menu-page__tab--active"
+            }`}
           onClick={() => history.push("/constructor-menu/" + tabs[0])}
         >
           Наборы задач
         </li>
         <li
-          className={`constructor-menu-page__tab ${
-            currentTab === tabs[1] && "constructor-menu-page__tab--active"
-          }`}
+          className={`constructor-menu-page__tab ${currentTab === tabs[1] && "constructor-menu-page__tab--active"
+            }`}
           onClick={() => history.push("/constructor-menu/" + tabs[1])}
         >
           Namespaces
         </li>
         <li
-          className={`constructor-menu-page__tab ${
-            currentTab === tabs[2] && "constructor-menu-page__tab--active"
-          }`}
+          className={`constructor-menu-page__tab ${currentTab === tabs[2] && "constructor-menu-page__tab--active"
+            }`}
           onClick={() => history.push("/constructor-menu/" + tabs[2])}
         >
           Пакеты Правил
